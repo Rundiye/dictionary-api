@@ -3,21 +3,38 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Input = require('../models/Input');
 const Dictionary = require('../models/Dictionary');
+// const createError = require('http-errors');
 
-// GET '/api/dictionaries/:dictionaryId/inputs/:inputId'   => to retrieve a specific task
+// const {
+//   validationForm
+// } = require('../helpers/middlewares.js');
+
+// GET '/api/dictionaries/:dictionaryId/inputs/:inputId'   => to retrieve a specific input
 router.get('/dictionaries/:dictionaryId/inputs/:inputId', (req, res) => {
-  Input.findById(req.params.taskId)
-    .then((foundTask) => {
-      res.json(foundTask);
+  Input.findById(req.params.inputId)
+    .then((foundInput) => {
+      res.json(foundInput);
     })
     .catch(err => {
       res.status(500).json(err);
     });
 });
 
-// POST '/api/inputs'      => to create a new task
+// POST '/api/inputs'      => to create a new input
 router.post('/inputs', (req, res) => {
-  const { domain, range } = req.body;
+  const { domain, range, dictionaryID } = req.body;
+
+  // const newInput = req.body;
+  // const inputs = Input.find();
+
+  // inputs.forEach(input => {
+  //   console.log(newInput);
+  //   if (newInput.domain === input.domain) {
+  //     return createError(402);
+  //   } else if (newInput.domain === newInput.range) {
+  //     return createError(423);
+  //   }
+  // });
 
   Input.create({
     domain: domain,

@@ -23,7 +23,8 @@ router.post('/dictionaries', (req, res) => {
 
 // GET '/dictionaries' => to get all the dictionaries
 router.get('/dictionaries', (req, res, next) => {
-  Dictionary.find().populate('inputs')
+  Dictionary.find()
+    .populate('inputs')
     .then(allTheDictionaries => {
       res.json(allTheDictionaries);
     })
@@ -43,7 +44,8 @@ router.get('/dictionaries/:id', (req, res) => {
     return;
   }
 
-  Dictionary.findById(id).populate('inputs')
+  Dictionary.findById(id)
+    .populate('inputs')
     .then((foundDictionary) => {
       res.status(200).json(foundDictionary);
     })
